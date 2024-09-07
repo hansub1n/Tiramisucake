@@ -1,25 +1,42 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
-const useUserStore = create((set) => {
-    return {
-        user: {
-            accessToken: "",
-            avatar: null,
-            nickname: "",
-            success: false,
-            userId: ""
-        },
-        loginUser: (data) =>
-            set(() => ({
-                user: {
-                    accessToken: data.accessToken,
-                    avatar: data.avatar,
-                    nickname: data.nickname,
-                    success: data.success,
-                    userId: data.userId
-                }
-            }))
-    };
-});
+const useUserStore = create(
+    persist(
+        (set) => ({
+            user: {
+                accessToken: "",
+                avatar: null,
+                nickname: "",
+                success: false,
+                userId: ""
+            },
+            logInUser: (data) =>
+                set(() => ({
+                    user: {
+                        accessToken: data.accessToken,
+                        avatar: data.avatar,
+                        nickname: data.nickname,
+                        success: data.success,
+                        userId: data.userId
+                    }
+                })),
+            logOutUser: () => {
+                set({
+                    user: {
+                        accessToken: "",
+                        avatar: null,
+                        nickname: "",
+                        success: false,
+                        userId: ""
+                    }
+                });
+            }
+        }),
+        {
+            name: "user"
+        }
+    )
+);
 
 export default useUserStore;

@@ -5,7 +5,7 @@ import useUserStore from "../zustand/UseUserStore";
 
 const Login = () => {
     const navigate = useNavigate();
-    const { loginUser } = useUserStore((state) => state);
+    const { logInUser } = useUserStore((state) => state);
 
     const [userData, setUserData] = useState({
         id: "",
@@ -18,7 +18,7 @@ const Login = () => {
 
         if (data.success) {
             alert("로그인 되었습니다.");
-            loginUser(data);
+            logInUser(data);
             navigate("/");
         } else {
             alert(data.message);

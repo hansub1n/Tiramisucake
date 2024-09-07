@@ -1,22 +1,43 @@
-import React from "react";
+import React, { useEffect } from "react";
+import useUserStore from "../zustand/UseUserStore";
+import { Link, useNavigate } from "react-router-dom";
 
 const Layout = ({ children }) => {
-    //유저 정보 가지고 오기
-    //유저 정보 없으면 회원가입 혹은 로그인 페이지 이동
+    const navigate = useNavigate();
+    const { user, logOutUser } = useUserStore((state) => state);
 
+    useEffect(() => {
+        console.log("Current user state:", user);
+        if (!user.success) {
+            // navigate("/");
+        }
+    }, [user, navigate]);
+
+    const handleLogout = () => {
+        logOutUser();
+        navigate("/");
+    };
     return (
         <div>
-            <nav>
-                {/* 유저 존재 */}
-                <Link to="/">홈</Link>
-                <Link to="/test">테스트</Link>
-                <Link to="/testresult">결과보기</Link>
-                <Link to="/signup">회원가입</Link>
-                <button>로그아웃</button>
-                {/* 유저 존재 X */}
-                <Link to="/signup">회원가입</Link>
-                <Link to="/login">로그인</Link>
-            </nav>
+            <header>
+                <nav>
+                    <Link to="/">홈</Link>
+
+                    {user.success ? (
+                        <>
+                            <Link to="/profile">프로필</Link>
+                            <Link to="/test">테스트</Link>
+                            <Link to="/testResults">결과보기</Link>
+                            <button onClick={handleLogout}>로그아웃</button>
+                        </>
+                    ) : (
+                        <>
+                            <Link to="/signup">회원가입</Link>
+                            <Link to="/login">로그인</Link>
+                        </>
+                    )}
+                </nav>
+            </header>
             <main>{children}</main>
         </div>
     );
