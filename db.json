@@ -1,3 +1,11 @@
 {
-    "testResults": []
+    "testResults": [
+        {
+            "id": "1",
+            "userId": "",
+            "nickname": "",
+            "testResult": "ENFP",
+            "visibility": true
+        }
+    ]
 }

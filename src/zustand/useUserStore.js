@@ -31,7 +31,14 @@ const useUserStore = create(
                         userId: ""
                     }
                 });
-            }
+            },
+            changeNickName: (data) =>
+                set((state) => ({
+                    user: {
+                        ...state.user,
+                        nickname: data.nickname
+                    }
+                }))
         }),
         {
             name: "user"

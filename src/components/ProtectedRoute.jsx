@@ -1,12 +1,13 @@
 import React from "react";
-import useUserStore from "../zustand/UseUserStore";
+import useUserStore from "../zustand/useUserStore";
+import { Navigate } from "react-router-dom";
 
-const ProtectedRoute = () => {
+const ProtectedRoute = ({ children }) => {
     const { user } = useUserStore((state) => state);
     if (!user.success) {
         return <Navigate to="/" />;
     }
-    return <div>ProtectedRoute</div>;
+    return children;
 };
 
 export default ProtectedRoute;

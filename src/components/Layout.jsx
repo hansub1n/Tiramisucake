@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import useUserStore from "../zustand/UseUserStore";
 import { Link, useNavigate } from "react-router-dom";
+import useUserStore from "../zustand/useUserStore";
 
 const Layout = ({ children }) => {
     const navigate = useNavigate();
@@ -8,15 +8,13 @@ const Layout = ({ children }) => {
 
     useEffect(() => {
         console.log("Current user state:", user);
-        if (!user.success) {
-            // navigate("/");
-        }
-    }, [user, navigate]);
+        navigate("/");
+    }, [user.success]);
 
     const handleLogout = () => {
         logOutUser();
-        navigate("/");
     };
+
     return (
         <div>
             <header>

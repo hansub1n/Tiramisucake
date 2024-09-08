@@ -7,6 +7,7 @@ import Test from "../pages/Test";
 import Signup from "../pages/Signup";
 import TestResults from "../pages/TestResults";
 import Layout from "../components/Layout";
+import ProtectedRoute from "../components/ProtectedRoute";
 
 const Router = () => {
     return (
@@ -14,9 +15,32 @@ const Router = () => {
             <Layout>
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route path="/profile" element={<Profile />} />
-                    <Route path="/test" element={<Test />} />
-                    <Route path="/testResults" element={<TestResults />} />
+
+                    <Route
+                        path="/profile"
+                        element={
+                            <ProtectedRoute>
+                                <Profile />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/test"
+                        element={
+                            <ProtectedRoute>
+                                <Test />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/testResults"
+                        element={
+                            <ProtectedRoute>
+                                <TestResults />
+                            </ProtectedRoute>
+                        }
+                    />
+
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<Signup />} />
                 </Routes>

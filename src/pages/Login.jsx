@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { login } from "../api/auth";
 import { useNavigate } from "react-router-dom";
-import useUserStore from "../zustand/UseUserStore";
+import useUserStore from "../zustand/useUserStore";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -19,7 +19,6 @@ const Login = () => {
         if (data.success) {
             alert("로그인 되었습니다.");
             logInUser(data);
-            navigate("/");
         } else {
             alert(data.message);
             setUserData({

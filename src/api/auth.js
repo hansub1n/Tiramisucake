@@ -23,16 +23,32 @@ export const login = async (userData) => {
 };
 // 프로필 정보 가져오기
 export const getUserProfile = async (token) => {
-    const response = await axios.get(`${API_URL}/user`, {
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`
-        }
-    });
-    return response.data;
+    try {
+        const response = await axios.get(`${API_URL}/user`, {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        return error.response.data;
+    }
 };
 // 프로필 업데이트
 export const updateProfile = async (formData) => {
-    const response = await axios.patch(`${API_URL}/user`, formData);
-    return response.data;
+    try {
+        const response = await axios.patch(
+            `${API_URL}/profile`,
+            { nickname: formData.nickname },
+            {
+                headers: {
+                    Authorization: `Bearer ${formData.accessToken}`
+                }
+            }
+        );
+        return response.data;
+    } catch (error) {
+        return error.response.data;
+    }
 };
