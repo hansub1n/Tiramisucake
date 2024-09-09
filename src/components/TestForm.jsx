@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { questions } from "../data/questions";
+import { creatTestResult } from "../api/testResults";
+import useUserStore from "../zustand/useUserStore";
 
-const TestForm = ({ setSubmit, setMbtiResult }) => {
+const TestForm = ({ setSubmit, setMbtiResult, setResultId }) => {
+    const { user } = useUserStore((state) => state);
+
     const [answers, setAnswers] = useState({});
     console.log(answers);
 
@@ -21,7 +25,7 @@ const TestForm = ({ setSubmit, setMbtiResult }) => {
         setAnswers({ ...answers, [id]: value });
     };
 
-    const testResult = (answers) => {
+    const testResult = async (answers) => {
         const answersArr = Object.values(answers);
         if (answersArr.length === 20) {
             const result = {};
@@ -34,6 +38,16 @@ const TestForm = ({ setSubmit, setMbtiResult }) => {
             setMbtiResult(mbtiResult);
             setSubmit(true);
             //테스트 결과 저장하기
+            const resultData = {
+                userId: user.userId,
+                nickname: user.nickname,
+                testResult: mbtiResult,
+                date: new Date().toISOString(),
+                visibility: false
+            };
+            const data = await creatTestResult(resultData);
+            const resultId = data.id;
+            setResultId(resultId);
         } else {
             alert("선택하지 않은 문항이 있습니다.");
         }

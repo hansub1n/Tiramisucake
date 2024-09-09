@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import useUserStore from "../zustand/useUserStore";
 
 const Login = () => {
-    const navigate = useNavigate();
     const { logInUser } = useUserStore((state) => state);
 
     const [userData, setUserData] = useState({

@@ -1,11 +1,20 @@
 {
-    "testResults": [
-        {
-            "id": "1",
-            "userId": "",
-            "nickname": "",
-            "testResult": "ENFP",
-            "visibility": true
-        }
-    ]
+  "testResults": [
+    {
+      "id": "1",
+      "userId": "Hi",
+      "nickname": "여기 주인",
+      "testResult": "CUTE",
+      "date": "서울시 여러분 담배꽁초",
+      "visibility": true
+    },
+    {
+      "id": "ceff",
+      "userId": "ㅁㄴㅇㄹㅇ",
+      "nickname": "ㅎㅇ태호",
+      "testResult": "INTP",
+      "date": "2024-09-09T07:06:39.044Z",
+      "visibility": false
+    }
+  ]
 }
