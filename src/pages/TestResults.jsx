@@ -20,16 +20,33 @@ const TestResults = () => {
 
     const visibilityHandler = async (id) => {
         await updateTestResultVisibility(id, true);
+        alert("테스트 결과 공개 처리되었습니다.");
         fetchData();
     };
     const hiddenHandler = async (id) => {
         await updateTestResultVisibility(id, false);
+        alert("테스트 결과 비공개 처리되었습니다.");
         fetchData();
     };
 
     const removeHandler = async (id) => {
-        await deleteTestResult(id);
-        fetchData();
+        const userConfirmed = confirm("테스트 결과 삭제하시겠습니까?");
+        if (userConfirmed) {
+            try {
+                await deleteTestResult(id);
+                alert("테스트 결과 삭제 처리되었습니다.");
+                fetchData();
+            } catch (error) {
+                console.log(error);
+            }
+        } else {
+            alert("삭제가 취소되었습니다.");
+        }
+    };
+
+    const formatDate = (dateString) => {
+        const [year, month, day] = dateString.split("T")[0].split("-");
+        return `${year}-${month}-${day}`;
     };
 
     return (
@@ -43,7 +60,7 @@ const TestResults = () => {
                     >
                         <div>
                             <h3 className="flex absolute top-7 left-7 text-xl">{testResult.nickname}</h3>
-                            <span className="flex absolute top-7 right-7">{testResult.date}</span>
+                            <span className="flex absolute top-7 right-7">{formatDate(testResult.date)}</span>
                         </div>
 
                         <h2 className="text-4xl">{testResult.testResult}</h2>

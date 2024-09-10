@@ -21,6 +21,7 @@ const Profile = () => {
             if (changeData.success) {
                 alert(changeData.message);
                 changeNickName(changeData);
+                setUserData({ ...userData, nickname: "" });
             } else {
                 alert(changeData.message);
             }

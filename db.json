@@ -5,7 +5,7 @@
       "userId": "Hi",
       "nickname": "여기 주인",
       "testResult": "CUTE",
-      "date": "서울시 여러분 담배꽁초",
+      "date": "서울시-여러분-담배꽁초",
       "visibility": true
     },
     {
@@ -14,7 +14,7 @@
       "nickname": "여기 강아지",
       "testResult": "ISFJ",
       "date": "2024-09-09T13:18:06.648Z",
-      "visibility": true
+      "visibility": false
     },
     {
       "id": "ee27",
@@ -27,7 +27,7 @@
     {
       "id": "f41a",
       "userId": "ㅋㅌㅊㅍㅊ",
-      "nickname": "여기 사장ㄴ..",
+      "nickname": "여기 사장님",
       "testResult": "INFP",
       "date": "2024-09-10T08:08:39.428Z",
       "visibility": true
