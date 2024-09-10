@@ -16,7 +16,7 @@ const TestResult = ({ setSubmit, mbtiResult, resultId }) => {
                     className="relative flex p-1.5 rounded-3xl bg-transparent overflow-hidden group transition-all duration-200"
                     onClick={retryTest}
                 >
-                    <img src={aginImg} className="w-10 h-10" />
+                    <img className="w-10 h-10" src={aginImg} alt="agin.png" />
                     <span className="absolute inset-0 bg-black opacity-0 group-hover:opacity-50 transition-opacity duration-200"></span>
                 </button>
             </div>
