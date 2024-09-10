@@ -41,7 +41,7 @@ const Login = () => {
                     />
                     <input
                         className="flex w-96 h-14 bg-white px-4 py-2.5 rounded-b-lg shadow-md "
-                        type="text"
+                        type="password"
                         value={userData.password}
                         onChange={(e) => setUserData({ ...userData, password: e.target.value })}
                         placeholder="PW"

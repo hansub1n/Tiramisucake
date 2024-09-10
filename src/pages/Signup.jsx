@@ -1,7 +1,6 @@
-import axios from "axios";
 import React, { useState } from "react";
-import { register } from "../api/auth";
 import { useNavigate } from "react-router-dom";
+import { register } from "../api/auth";
 
 const Signup = () => {
     const navigate = useNavigate();
@@ -43,7 +42,7 @@ const Signup = () => {
                     />
                     <input
                         className="flex w-96 h-14 bg-white px-4 py-2.5 rounded-b-lg shadow-md "
-                        type="text"
+                        type="password"
                         value={userData.password}
                         onChange={(e) => setUserData({ ...userData, password: e.target.value })}
                         placeholder="PW"
