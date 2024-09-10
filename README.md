@@ -3,29 +3,57 @@
 #### 리액트 심화 개인과제
 
 T라 미숙해는 MBTI 성격 유형 테스트 서비스 제공하는 웹 애플리케이션입니다. 사용자는 테스트를 통해 자신의 MBTI 성격 유형을 확인할 수 있으며, 결과를 다른 사용자들과 공유할 수 있습니다. 로그인을 통해 사용자 고유의 프로필을 관리할 수 있습니다.<br/><br/>
-![이미지 1](src/assets/image.png)![이미지 2](src/assets/image-1.png)![이미지 3](src/assets/image-2.png)![이미지 4](src/assets/image-3.png)![이미지 5](src/assets/image-4.png)![이미지 6](src/assets/image-5.png)![이미지 7](src/assets/image-6.png)![이미지 8](src/assets/image-7.png)![이미지 9](src/assets/image-8.png)
 
 #### 프로젝트 구조
 
-1. **홈페이지**<br/>
-
-    - 로그인하지 않아도 접근할 수 있습니다. 성격 검사를 시작할 수 있는 버튼이 제공됩니다.
-
-2. **로그인 / 회원가입 페이지**<br/>
-
-    - 테스트를 진행하거나 프로필을 관리하기 위해서는 로그인 또는 회원가입이 필요합니다.
-
-3. **테스트 페이지**<br/>
-
-    - MBTI 성격 검사를 진행할 수 있는 페이지입니다. 질문에 답변한 후 제출하면 검사 결과 컴포넌트가 조건 렌더링됩니다. 이 컴포넌트에서 '다시하기' 버튼으로 테스트를 다시 진행하거나 '결과 공유' 버튼으로 결과를 공유할 수 있습니다.
-
-4. **테스트 결과 페이지**<br/>
-
-    - 테스트 결과를 확인할 수 있으며, 결과를 공개 또는 비공개로 설정할 수 있습니다. 또한, 다른 사용자의 공개된 테스트 결과를 볼 수 있습니다.
-
-5. **프로필 변경 페이지**<br/>
-
-    - 사용자는 자신의 닉네임을 변경할 수 있습니다.<br/><br/>
+<details>
+<summary>프로젝트 구조</summary>
+...
+📦Tiramisucake<br/>
+ ┣ 📂public<br/>
+ ┃ ┗ 📜vite.svg<br/>
+ ┣ 📂src<br/>
+ ┃ ┣ 📂api<br/>
+ ┃ ┃ ┣ 📜auth.js<br/>
+ ┃ ┃ ┗ 📜testResults.js<br/>
+ ┃ ┣ 📂assets<br/>
+ ┃ ┃ ┣ 📜agin.png<br/>
+ ┃ ┃ ┗ 📜react.svg<br/>
+ ┃ ┣ 📂components<br/>
+ ┃ ┃ ┣ 📜AuthForm.jsx(작업중)<br/>
+ ┃ ┃ ┣ 📜Layout.jsx<br/>
+ ┃ ┃ ┣ 📜ProtectedRoute.jsx<br/>
+ ┃ ┃ ┣ 📜TestForm.jsx<br/>
+ ┃ ┃ ┗ 📜TestResult.jsx<br/>
+ ┃ ┣ 📂data<br/>
+ ┃ ┃ ┗ 📜questions.js<br/>
+ ┃ ┣ 📂pages<br/>
+ ┃ ┃ ┣ 📜Home.jsx<br/>
+ ┃ ┃ ┣ 📜Login.jsx<br/>
+ ┃ ┃ ┣ 📜Profile.jsx<br/>
+ ┃ ┃ ┣ 📜Signup.jsx<br/>
+ ┃ ┃ ┣ 📜Test.jsx<br/>
+ ┃ ┃ ┗ 📜TestResults.jsx<br/>
+ ┃ ┣ 📂shared<br/>
+ ┃ ┃ ┗ 📜Router.jsx<br/>
+ ┃ ┣ 📂zustand<br/>
+ ┃ ┃ ┗ 📜useUserStore.js<br/>
+ ┃ ┣ 📜App.jsx<br/>
+ ┃ ┣ 📜index.css<br/>
+ ┃ ┗ 📜main.jsx<br/>
+ ┣ 📜.gitignore<br/>
+ ┣ 📜.prettierrc<br/>
+ ┣ 📜db.json<br/>
+ ┣ 📜eslint.config.js<br/>
+ ┣ 📜index.html<br/>
+ ┣ 📜package.json<br/>
+ ┣ 📜postcss.config.js<br/>
+ ┣ 📜README.md<br/>
+ ┣ 📜tailwind.config.js<br/>
+ ┣ 📜vite.config.js<br/>
+ ┗ 📜yarn.lock<br/>
+ ...
+</details>
 
 #### 실행 방법
 
