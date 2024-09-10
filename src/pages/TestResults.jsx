@@ -4,12 +4,10 @@ import useUserStore from "../zustand/useUserStore";
 
 const TestResults = () => {
     const { user } = useUserStore((state) => state);
-    // 테스트 결과 데이터 중 visibility true인 데이터만 가지고오도록 필터
     const [testResults, setTestResults] = useState(null);
 
     const fetchData = async () => {
         const data = await getTestResults();
-        console.log(data);
         const filteredData = data.filter((d) => d.visibility === true || d.userId === user.userId);
         setTestResults(filteredData);
     };

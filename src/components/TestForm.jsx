@@ -7,7 +7,6 @@ const TestForm = ({ setSubmit, setMbtiResult, setResultId }) => {
     const { user } = useUserStore((state) => state);
 
     const [answers, setAnswers] = useState({});
-    console.log(answers);
 
     const updateAnswers = (answer, type, id) => {
         let value = "";
@@ -37,7 +36,6 @@ const TestForm = ({ setSubmit, setMbtiResult, setResultId }) => {
 
             setMbtiResult(mbtiResult);
             setSubmit(true);
-            //테스트 결과 저장하기
             const resultData = {
                 userId: user.userId,
                 nickname: user.nickname,

@@ -7,7 +7,6 @@ const Layout = ({ children }) => {
     const { user, logOutUser } = useUserStore((state) => state);
 
     useEffect(() => {
-        console.log("Current user state:", user);
         navigate("/");
     }, [user.success]);
 
