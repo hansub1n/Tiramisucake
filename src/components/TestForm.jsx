@@ -54,29 +54,43 @@ const TestForm = ({ setSubmit, setMbtiResult, setResultId }) => {
     };
 
     return (
-        <div>
-            <h2>MBTI 테스트</h2>
+        <div className="flex flex-col justify-center items-center mb-52">
+            <h2 className="mb-26 text-5xl">MBTI 테스트</h2>
             {questions.map((q) => {
                 return (
-                    <form key={q.id}>
-                        <span>{q.question}</span>
-                        {q.options.map((answer, index) => {
-                            return (
-                                <div key={answer[index]}>
-                                    <input
-                                        type="radio"
-                                        name={q.id}
-                                        value={answer}
-                                        onClick={() => updateAnswers(answer, q.type, q.id)}
-                                    />
-                                    {answer}
-                                </div>
-                            );
-                        })}
+                    <form
+                        className="flex flex-col justify-center items-center m-12 w-[50rem] bg-white h-52 rounded-3xl shadow-md"
+                        key={q.id}
+                    >
+                        <span className="text-xl">{q.question}</span>
+                        <div className="flex flex-row justify-center items-center gap-12 mt-12 text-lg">
+                            {q.options.map((answer, index) => {
+                                return (
+                                    <div
+                                        className="flex flex-row justify-center items-center gap-2.5"
+                                        key={answer[index]}
+                                    >
+                                        <input
+                                            className="w-5 h-5 hover: cursor-pointer"
+                                            type="radio"
+                                            name={q.id}
+                                            value={answer}
+                                            onClick={() => updateAnswers(answer, q.type, q.id)}
+                                        />
+                                        {answer}
+                                    </div>
+                                );
+                            })}
+                        </div>
                     </form>
                 );
             })}
-            <button onClick={() => testResult(answers)}>제출</button>
+            <button
+                className="flex justify-center items-center mt-12 p-5 h-12 rounded-3xl text-2xl shadow-md bg-red-400"
+                onClick={() => testResult(answers)}
+            >
+                제출
+            </button>
         </div>
     );
 };

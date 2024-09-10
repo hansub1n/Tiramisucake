@@ -29,15 +29,20 @@ const Profile = () => {
         }
     };
     return (
-        <div>
-            <h2>프로필 수정</h2>
-            <input
-                type="text"
-                value={userData.nickname}
-                onChange={(e) => setUserData({ ...userData, nickname: e.target.value })}
-                placeholder="nickname"
-            />
-            <button onClick={onChangeHandle}>등록</button>
+        <div className="flex flex-col justify-center items-center">
+            <h2 className="mb-12 text-5xl">프로필 수정</h2>
+            <div className="flex relative justify-center items-center">
+                <input
+                    className="flex w-[500px] h-[55px] bg-white shadow-md rounded-3xl p-8"
+                    type="text"
+                    value={userData.nickname}
+                    onChange={(e) => setUserData({ ...userData, nickname: e.target.value })}
+                    placeholder="nickname"
+                />
+                <button className="flex absolute bg-red-400 rounded-3xl p-3 right-0 mr-3" onClick={onChangeHandle}>
+                    등록
+                </button>
+            </div>
         </div>
     );
 };

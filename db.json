@@ -9,12 +9,28 @@
       "visibility": true
     },
     {
-      "id": "ceff",
+      "id": "f23e",
       "userId": "ㅁㄴㅇㄹㅇ",
-      "nickname": "ㅎㅇ태호",
-      "testResult": "INTP",
-      "date": "2024-09-09T07:06:39.044Z",
-      "visibility": false
+      "nickname": "여기 강아지",
+      "testResult": "ISFJ",
+      "date": "2024-09-09T13:18:06.648Z",
+      "visibility": true
+    },
+    {
+      "id": "ee27",
+      "userId": "ㅂㅈㄷㄱㄷ",
+      "nickname": "여기 저기",
+      "testResult": "ENFJ",
+      "date": "2024-09-09T13:20:06.481Z",
+      "visibility": true
+    },
+    {
+      "id": "f41a",
+      "userId": "ㅋㅌㅊㅍㅊ",
+      "nickname": "여기 사장ㄴ..",
+      "testResult": "INFP",
+      "date": "2024-09-10T08:08:39.428Z",
+      "visibility": true
     }
   ]
 }

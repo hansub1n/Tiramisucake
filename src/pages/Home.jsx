@@ -16,9 +16,14 @@ const Home = () => {
     };
 
     return (
-        <div>
-            <h2>MBTI 테스트</h2>
-            <button onClick={onClickHandler}>내 성격 알아보러 가기</button>
+        <div className="flex flex-col justify-center items-center">
+            <h2 className="mb-8 text-5xl">MBTI 테스트</h2>
+            <button
+                className="flex absolute top-1/4 justify-center items-center text-xl h-12 bg-red-400 p-5 shadow-md rounded-3xl "
+                onClick={onClickHandler}
+            >
+                내 성격 알아보러 가기
+            </button>
         </div>
     );
 };

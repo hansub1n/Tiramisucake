@@ -29,23 +29,29 @@ const Signup = () => {
     };
 
     return (
-        <div>
-            <form onSubmit={onSubmitHandler}>
+        <div className="flex flex-col justify-center items-center">
+            <h2 className="mb-16 text-5xl">회원가입</h2>
+            <form className="flex flex-col justify-center items-center gap-8" onSubmit={onSubmitHandler}>
+                <div>
+                    <input
+                        className="flex w-96 h-14 bg-white px-4 py-2.5 rounded-t-lg shadow-md border-b-4 "
+                        type="text"
+                        value={userData.id}
+                        onChange={(e) => setUserData({ ...userData, id: e.target.value })}
+                        placeholder="ID"
+                        required
+                    />
+                    <input
+                        className="flex w-96 h-14 bg-white px-4 py-2.5 rounded-b-lg shadow-md "
+                        type="text"
+                        value={userData.password}
+                        onChange={(e) => setUserData({ ...userData, password: e.target.value })}
+                        placeholder="PW"
+                        required
+                    />
+                </div>
                 <input
-                    type="text"
-                    value={userData.id}
-                    onChange={(e) => setUserData({ ...userData, id: e.target.value })}
-                    placeholder="ID"
-                    required
-                />
-                <input
-                    type="text"
-                    value={userData.password}
-                    onChange={(e) => setUserData({ ...userData, password: e.target.value })}
-                    placeholder="PW"
-                    required
-                />
-                <input
+                    className="flex w-96 h-14 px-4 py-2.5 bg-white shadow-md rounded-2xl"
                     type="text"
                     value={userData.nickname}
                     onChange={(e) => setUserData({ ...userData, nickname: e.target.value })}
@@ -53,7 +59,9 @@ const Signup = () => {
                     required
                 />
 
-                <button>회원가입</button>
+                <button className="flex justify-center items-center w-96 h-14 bg-red-400 px-4 py-2.5 rounded-2xl shadow-md">
+                    회원가입
+                </button>
             </form>
         </div>
     );
