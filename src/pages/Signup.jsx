@@ -30,7 +30,7 @@ const Signup = () => {
         }
     });
 
-    const onSubmitHandler = async (e) => {
+    const onSubmitHandler = (e) => {
         e.preventDefault();
         mutate(userData);
     };

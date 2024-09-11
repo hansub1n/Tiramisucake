@@ -2,11 +2,20 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { deleteTestResult } from "../api/testResults";
 import aginImg from "../assets/agin.png";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const TestResult = ({ setSubmit, mbtiResult, resultId }) => {
-    const retryTest = async () => {
-        await deleteTestResult(resultId);
+    const queryClient = useQueryClient();
+
+    const { mutate } = useMutation({
+        mutationFn: deleteTestResult,
+        onSuccess: () => {
+            queryClient.invalidateQueries(["testResults"]);
+        }
+    });
+    const retryTest = () => {
         setSubmit(false);
+        mutate(resultId);
     };
     return (
         <div className="flex flex-col justify-center items-center">

@@ -31,7 +31,7 @@ const Profile = () => {
         }
     });
 
-    const onChangeHandle = async () => {
+    const onChangeHandle = () => {
         mutate(userData);
     };
 

@@ -11,7 +11,7 @@ export const getTestResults = async () => {
     }
 };
 
-export const creatTestResult = async (resultData) => {
+export const createTestResult = async (resultData) => {
     const response = await axios.post(API_URL, resultData);
     return response.data;
 };
