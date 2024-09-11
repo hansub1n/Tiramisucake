@@ -35,7 +35,7 @@ const TestForm = ({ setSubmit, setMbtiResult, setResultId }) => {
         setAnswers({ ...answers, [id]: value });
     };
 
-    const testResult = async (answers) => {
+    const testResult = (answers) => {
         const answersArr = Object.values(answers);
 
         if (answersArr.length === 20) {
