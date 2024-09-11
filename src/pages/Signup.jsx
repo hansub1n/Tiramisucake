@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { register } from "../api/auth";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const Signup = () => {
+    const queryClient = useQueryClient();
     const navigate = useNavigate();
     const [userData, setUserData] = useState({
         id: "",
@@ -10,21 +12,27 @@ const Signup = () => {
         nickname: ""
     });
 
+    const { mutate } = useMutation({
+        mutationFn: register,
+        onSuccess: (data) => {
+            if (data.success) {
+                alert(data.message);
+                navigate("/");
+                queryClient.invalidateQueries(["register"]);
+            } else {
+                alert(data.message);
+                setUserData({
+                    id: "",
+                    password: "",
+                    nickname: ""
+                });
+            }
+        }
+    });
+
     const onSubmitHandler = async (e) => {
         e.preventDefault();
-        const { message, success } = await register(userData);
-
-        if (success) {
-            alert(message);
-            navigate("/");
-        } else {
-            alert(message);
-            setUserData({
-                id: "",
-                password: "",
-                nickname: ""
-            });
-        }
+        mutate(userData);
     };
 
     return (
