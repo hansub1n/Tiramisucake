@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { questions } from "../data/questions";
-import { creatTestResult } from "../api/testResults";
+import { createTestResult } from "../api/testResults";
 import useUserStore from "../zustand/useUserStore";
 
 const TestForm = ({ setSubmit, setMbtiResult, setResultId }) => {
@@ -43,7 +43,7 @@ const TestForm = ({ setSubmit, setMbtiResult, setResultId }) => {
                 date: new Date().toISOString(),
                 visibility: true
             };
-            const data = await creatTestResult(resultData);
+            const data = await createTestResult(resultData);
             const resultId = data.id;
             setResultId(resultId);
         } else {
@@ -64,16 +64,13 @@ const TestForm = ({ setSubmit, setMbtiResult, setResultId }) => {
                         <div className="flex flex-row justify-center items-center gap-12 mt-12 text-lg">
                             {q.options.map((answer, index) => {
                                 return (
-                                    <div
-                                        className="flex flex-row justify-center items-center gap-2.5"
-                                        key={answer[index]}
-                                    >
+                                    <div className="flex flex-row justify-center items-center gap-2.5" key={index}>
                                         <input
                                             className="w-5 h-5 hover: cursor-pointer"
                                             type="radio"
                                             name={q.id}
                                             value={answer}
-                                            onClick={() => updateAnswers(answer, q.type, q.id)}
+                                            onChange={() => updateAnswers(answer, q.type, q.id)}
                                         />
                                         {answer}
                                     </div>
