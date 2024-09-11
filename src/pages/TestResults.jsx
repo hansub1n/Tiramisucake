@@ -1,51 +1,65 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { deleteTestResult, getTestResults, updateTestResultVisibility } from "../api/testResults";
 import useUserStore from "../zustand/useUserStore";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 const TestResults = () => {
+    const queryClient = useQueryClient();
     const { user } = useUserStore((state) => state);
-    const [testResults, setTestResults] = useState(null);
 
     const fetchData = async () => {
         const data = await getTestResults();
-        const filteredData = data.filter((d) => d.visibility === true || d.userId === user.userId);
-        setTestResults(filteredData);
+        return data.filter((d) => d.visibility === true || d.userId === user.userId);
     };
 
-    useEffect(() => {
-        fetchData();
-    }, []);
+    const {
+        data: testResults,
+        isPending,
+        isError
+    } = useQuery({
+        queryKey: ["testResults"],
+        queryFn: fetchData
+    });
 
-    const visibilityHandler = async (id) => {
-        await updateTestResultVisibility(id, true);
-        alert("테스트 결과 공개 처리되었습니다.");
-        fetchData();
-    };
-    const hiddenHandler = async (id) => {
-        await updateTestResultVisibility(id, false);
-        alert("테스트 결과 비공개 처리되었습니다.");
-        fetchData();
-    };
+    const { mutate: updateVisibility } = useMutation({
+        mutationFn: updateTestResultVisibility,
+        onSuccess: (data, variables) => {
+            alert(`테스트 결과 ${variables.visibility ? "공개" : "비공개"} 처리되었습니다.`);
+            queryClient.invalidateQueries(["testResults"]);
+        }
+    });
 
-    const removeHandler = async (id) => {
+    const { mutate: deleteResult } = useMutation({
+        mutationFn: deleteTestResult,
+        onSuccess: () => {
+            alert("테스트 결과가 삭제되었습니다.");
+            queryClient.invalidateQueries(["testResults"]);
+        }
+    });
+
+    const removeHandler = (id) => {
         const userConfirmed = confirm("테스트 결과 삭제하시겠습니까?");
         if (userConfirmed) {
-            try {
-                await deleteTestResult(id);
-                alert("테스트 결과 삭제 처리되었습니다.");
-                fetchData();
-            } catch (error) {
-                console.log(error);
-            }
-        } else {
-            alert("삭제가 취소되었습니다.");
+            deleteResult(id);
         }
+    };
+
+    const visibilityHandler = (id, isvisible) => {
+        updateVisibility({ id, visibility: isvisible });
     };
 
     const formatDate = (dateString) => {
         const [year, month, day] = dateString.split("T")[0].split("-");
         return `${year}-${month}-${day}`;
     };
+
+    if (isPending) {
+        return <div>로딩 중입니다...</div>;
+    }
+
+    if (isError) {
+        return <div>데이터 조회 중 오류가 발생했습니다...</div>;
+    }
 
     return (
         <div className="flex flex-col justify-center items-center mb-16">
@@ -65,23 +79,14 @@ const TestResults = () => {
                         <div className="flex absolute bottom-7 right-7 gap-3">
                             {user.userId !== testResult.userId ? null : (
                                 <>
-                                    <div>
-                                        {testResult.visibility ? (
-                                            <button
-                                                className="bg-slate-600 p-4 rounded-2xl"
-                                                onClick={() => hiddenHandler(testResult.id)}
-                                            >
-                                                비공개
-                                            </button>
-                                        ) : (
-                                            <button
-                                                className="bg-amber-100 p-4 rounded-2xl"
-                                                onClick={() => visibilityHandler(testResult.id)}
-                                            >
-                                                공개
-                                            </button>
-                                        )}
-                                    </div>
+                                    <button
+                                        className={`p-4 rounded-2xl ${
+                                            testResult.visibility ? "bg-slate-600" : "bg-amber-100"
+                                        }`}
+                                        onClick={() => visibilityHandler(testResult.id, !testResult.visibility)}
+                                    >
+                                        {testResult.visibility ? "비공개" : "공개"}
+                                    </button>
                                     <button
                                         className="bg-red-400 p-4 rounded-2xl"
                                         onClick={() => removeHandler(testResult.id)}
