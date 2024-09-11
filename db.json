@@ -39,6 +39,14 @@
       "testResult": "INFP",
       "date": "2024-09-10T08:08:39.428Z",
       "visibility": true
+    },
+    {
+      "id": "9dfc",
+      "userId": "hihihi333",
+      "nickname": "안녕 세번",
+      "testResult": "INFP",
+      "date": "2024-09-11T08:28:31.696Z",
+      "visibility": false
     }
   ]
 }
