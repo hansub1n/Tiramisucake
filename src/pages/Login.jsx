@@ -18,7 +18,7 @@ const Login = () => {
             if (data.success) {
                 alert("로그인 되었습니다.");
                 logInUser(data);
-                queryClient.invalidateQueries(["login"]);
+                queryClient.invalidateQueries(["user"]);
             } else {
                 alert(data.message);
                 setUserData({

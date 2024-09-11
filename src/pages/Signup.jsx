@@ -18,7 +18,7 @@ const Signup = () => {
             if (data.success) {
                 alert(data.message);
                 navigate("/");
-                queryClient.invalidateQueries(["register"]);
+                queryClient.invalidateQueries(["user"]);
             } else {
                 alert(data.message);
                 setUserData({
