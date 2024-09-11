@@ -1,12 +1,23 @@
 import React, { useState } from "react";
 import { questions } from "../data/questions";
-import { creatTestResult } from "../api/testResults";
+import { createTestResult } from "../api/testResults";
 import useUserStore from "../zustand/useUserStore";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const TestForm = ({ setSubmit, setMbtiResult, setResultId }) => {
+    const queryClient = useQueryClient();
     const { user } = useUserStore((state) => state);
 
     const [answers, setAnswers] = useState({});
+
+    const { mutate } = useMutation({
+        mutationFn: createTestResult,
+        onSuccess: (data) => {
+            const resultId = data.id;
+            setResultId(resultId);
+            queryClient.invalidateQueries(["testResults"]);
+        }
+    });
 
     const updateAnswers = (answer, type, id) => {
         let value = "";
@@ -26,16 +37,21 @@ const TestForm = ({ setSubmit, setMbtiResult, setResultId }) => {
 
     const testResult = async (answers) => {
         const answersArr = Object.values(answers);
+
         if (answersArr.length === 20) {
             const result = {};
+
             answersArr.forEach((answer) => {
                 result[answer] = (result[answer] || 0) + 1;
             });
+
             const { E, I, S, N, T, F, J, P } = result;
+
             const mbtiResult = (E > I ? "E" : "I") + (S > N ? "S" : "N") + (T > F ? "T" : "F") + (J > P ? "J" : "P");
 
             setMbtiResult(mbtiResult);
             setSubmit(true);
+
             const resultData = {
                 userId: user.userId,
                 nickname: user.nickname,
@@ -43,9 +59,8 @@ const TestForm = ({ setSubmit, setMbtiResult, setResultId }) => {
                 date: new Date().toISOString(),
                 visibility: true
             };
-            const data = await creatTestResult(resultData);
-            const resultId = data.id;
-            setResultId(resultId);
+
+            mutate(resultData);
         } else {
             alert("선택하지 않은 문항이 있습니다.");
         }
@@ -64,16 +79,13 @@ const TestForm = ({ setSubmit, setMbtiResult, setResultId }) => {
                         <div className="flex flex-row justify-center items-center gap-12 mt-12 text-lg">
                             {q.options.map((answer, index) => {
                                 return (
-                                    <div
-                                        className="flex flex-row justify-center items-center gap-2.5"
-                                        key={answer[index]}
-                                    >
+                                    <div className="flex flex-row justify-center items-center gap-2.5" key={index}>
                                         <input
                                             className="w-5 h-5 hover: cursor-pointer"
                                             type="radio"
                                             name={q.id}
                                             value={answer}
-                                            onClick={() => updateAnswers(answer, q.type, q.id)}
+                                            onChange={() => updateAnswers(answer, q.type, q.id)}
                                         />
                                         {answer}
                                     </div>
