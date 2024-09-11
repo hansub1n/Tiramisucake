@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { getUserProfile, updateProfile } from "../api/auth";
 import useUserStore from "../zustand/useUserStore";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 const Profile = () => {
+    const queryClient = useQueryClient();
     const { user, changeNickName } = useUserStore((state) => state);
 
     const [userData, setUserData] = useState({
@@ -10,21 +12,35 @@ const Profile = () => {
         nickname: ""
     });
 
-    const onChangeHandle = async () => {
-        const data = await getUserProfile(user.accessToken);
-        if (data.success) {
-            const changeData = await updateProfile(userData);
-            if (changeData.success) {
-                alert(changeData.message);
-                changeNickName(changeData);
+    const { isLoading, isError } = useQuery({
+        queryKey: ["user", user.accessToken],
+        queryFn: () => getUserProfile(user.accessToken)
+    });
+
+    const { mutate } = useMutation({
+        mutationFn: updateProfile,
+        onSuccess: (data) => {
+            if (data.success) {
+                alert(data.message);
+                changeNickName(data.nickname);
                 setUserData({ ...userData, nickname: "" });
+                queryClient.invalidateQueries(["user"]);
             } else {
-                alert(changeData.message);
+                alert(data.message);
             }
-        } else {
-            alert(data.message);
         }
+    });
+
+    const onChangeHandle = async () => {
+        mutate(userData);
     };
+
+    if (isLoading) {
+        return <div>로딩 중입니다...</div>;
+    }
+    if (isError) {
+        return <div>데이터 조회 중 오류가 발생했습니다...</div>;
+    }
     return (
         <div className="flex flex-col justify-center items-center">
             <h2 className="mb-12 text-5xl">프로필 수정</h2>

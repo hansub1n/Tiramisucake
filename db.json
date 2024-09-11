@@ -14,14 +14,6 @@
       "nickname": "여기 강아지",
       "testResult": "ISFJ",
       "date": "2024-09-09T13:18:06.648Z",
-      "visibility": false
-    },
-    {
-      "id": "635f",
-      "userId": "hihihi333",
-      "nickname": "안녕세번",
-      "testResult": "ESFJ",
-      "date": "2024-09-10T11:06:39.054Z",
       "visibility": true
     },
     {
@@ -41,12 +33,21 @@
       "visibility": true
     },
     {
-      "id": "9dfc",
+      "id": "2981",
       "userId": "hihihi333",
       "nickname": "안녕 세번",
       "testResult": "INFP",
-      "date": "2024-09-11T08:28:31.696Z",
-      "visibility": false
+      "date": "2024-09-11T08:19:39.845Z",
+      "visibility": true
+    },
+    {
+      "id": "35fa",
+      "userId": "hahaha333",
+      "nickname": "크게세번웃자",
+      "testResult": "INFP",
+      "date": "2024-09-11T10:26:25.159Z",
+      "visibility": true
+
     }
   ]
 }

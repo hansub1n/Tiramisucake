@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { login } from "../api/auth";
 import useUserStore from "../zustand/useUserStore";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const Login = () => {
+    const queryClient = useQueryClient();
     const { logInUser } = useUserStore((state) => state);
 
     const [userData, setUserData] = useState({
@@ -10,20 +12,26 @@ const Login = () => {
         password: ""
     });
 
-    const onSubmitHandler = async (e) => {
-        e.preventDefault();
-        const data = await login(userData);
-
-        if (data.success) {
-            alert("로그인 되었습니다.");
-            logInUser(data);
-        } else {
-            alert(data.message);
-            setUserData({
-                id: "",
-                password: ""
-            });
+    const { mutate } = useMutation({
+        mutationFn: login,
+        onSuccess: (data) => {
+            if (data.success) {
+                alert("로그인 되었습니다.");
+                logInUser(data);
+                queryClient.invalidateQueries(["user"]);
+            } else {
+                alert(data.message);
+                setUserData({
+                    id: "",
+                    password: ""
+                });
+            }
         }
+    });
+
+    const onSubmitHandler = (e) => {
+        e.preventDefault();
+        mutate(userData);
     };
 
     return (
@@ -49,7 +57,10 @@ const Login = () => {
                     />
                 </div>
 
-                <button className="flex justify-center items-center w-96 h-14 bg-red-400 px-4 py-2.5 rounded-2xl shadow-md">
+                <button
+                    className="flex justify-center items-center w-96 h-14 bg-red-400 px-4 py-2.5 rounded-2xl shadow-md"
+                    type="submit"
+                >
                     로그인
                 </button>
             </form>

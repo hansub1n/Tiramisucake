@@ -36,7 +36,7 @@ const useUserStore = create(
                 set((state) => ({
                     user: {
                         ...state.user,
-                        nickname: data.nickname
+                        nickname: data
                     }
                 }))
         }),
