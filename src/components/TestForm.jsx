@@ -41,7 +41,7 @@ const TestForm = ({ setSubmit, setMbtiResult, setResultId }) => {
                 nickname: user.nickname,
                 testResult: mbtiResult,
                 date: new Date().toISOString(),
-                visibility: false
+                visibility: true
             };
             const data = await creatTestResult(resultData);
             const resultId = data.id;
