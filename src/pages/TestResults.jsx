@@ -14,7 +14,7 @@ const TestResults = () => {
 
     const {
         data: testResults,
-        isPending,
+        isLoading,
         isError
     } = useQuery({
         queryKey: ["testResults"],
@@ -53,7 +53,7 @@ const TestResults = () => {
         return `${year}-${month}-${day}`;
     };
 
-    if (isPending) {
+    if (isLoading) {
         return <div>로딩 중입니다...</div>;
     }
 
